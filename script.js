@@ -3,7 +3,7 @@ var mode = 0; //mode 0タイトル画面　1セレクト画面　2プレイ画�
 var animationmax = 1; //nextmodeにうつるタイミング
 var animationcnt=0; //アニメーションのカウンター 1でスタート -1処理前
 var nextmode=0; //次にうつるモード
-
+var testPoints=[{top:0.9,left:0.5},{top:0.2,left:0.2},{top:0.3,left:0.8},{top:0.3,left:0.1}]
 // ページの読み込みを待つ
 
 
@@ -38,9 +38,29 @@ function init() {
         t++;//システム系の処理
         //2次元のリセット処理
         ctx2d.clearRect(0,0,width,height);
-
-        ctx2d.fillStyle="rgba(255,255,0,1.0)";
-        ctx2d.fillRect(30+t,30,30,30);
+        ctx2d.beginPath();
+        ctx2d.strokeStyle="rgba(255,255,255,1)";
+        ctx2d.lineWidth=5;
+        ctx2d.moveTo(30,0);
+        ctx2d.lineTo(0,0);
+        ctx2d.lineTo(0,30);
+        ctx2d.moveTo(width-30,0);
+        ctx2d.lineTo(width,0);
+        ctx2d.lineTo(width,30);
+        ctx2d.moveTo(width-30,width);
+        ctx2d.lineTo(width,width);
+        ctx2d.lineTo(width,width-30);
+        ctx2d.moveTo(30,width);
+        ctx2d.lineTo(0,width);
+        ctx2d.lineTo(0,width-30);
+        ctx2d.stroke();
+        for (i = 0;i < testPoints.length;i++){
+            ctx2d.beginPath();
+            ctx2d.strokeStyle="rgba(0,0,0,0)";
+            ctx2d.fillStyle="rgba(255,0,0,1)";
+            ctx2d.arc(width*testPoints[i].left,width*testPoints[i].top,12,0,Math.PI*2);
+            ctx2d.fill();
+        }
 
         requestAnimationFrame(tick);
     }
